@@ -1,7 +1,4 @@
-package com.demo.leetcode;
-
-import java.util.LinkedList;
-import java.util.Queue;
+package com.demo.leetcode.datastruct;
 
 public class MyCircularQueue {
     //使用front rear更合理
@@ -59,3 +56,4 @@ public class MyCircularQueue {
         return length == fullSize;
     }
 }
+

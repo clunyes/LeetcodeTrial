@@ -1,122 +1,83 @@
 package com.demo.leftgod;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import com.demo.leetcode.datastruct.TreeNode;
 
 public class TreePrintUtil {
-    public static void pirnt(TreeNode root) {
-        // 找到左边的最大偏移量
-        int maxLeftOffset = findMaxOffset(root, 0, true);
-        int maxRightOffset = findMaxOffset(root, 0, false);
-        int offset = Math.max(maxLeftOffset, maxRightOffset);
-        // 计算最大偏移量
-        Map<Integer, PrintLine> lineMap = new HashMap();
-        calculateLines(root, offset, lineMap, 0, true);
-        Iterator<Integer> lineNumbers = lineMap.keySet().iterator();
-        int maxLine = 0;
-        while (lineNumbers.hasNext()) {
-            int lineNumber = lineNumbers.next();
-            if (lineNumber > maxLine) {
-                maxLine = lineNumber;
-            }
-        }
-        for (int i = 0; i <= maxLine; i++) {
-            PrintLine line = lineMap.get(i);
-            if (line != null) {
-                System.out.println(line.getLineString());
-            }
-        }
+    /*
+    树的结构示例：
+              1
+            /   \
+          2       3
+         / \     / \
+        4   5   6   7
+    */
 
+    // 用于获得树的层数
+    public static int getTreeDepth(TreeNode root) {
+        return root == null ? 0 : (1 + Math.max(getTreeDepth(root.left), getTreeDepth(root.right)));
     }
 
-    private static void calculateLines(TreeNode parent, int offset, Map<Integer, PrintLine> lineMap, int level,
-                                       boolean right) {
-        if (parent == null) {
-            return;
-        }
-        int nameoffset = parent.toString().length() / 2;
-        PrintLine line = lineMap.get(level);
-        if (line == null) {
-            line = new PrintLine();
-            lineMap.put(level, line);
-        }
-        line.putString(right ? offset : (offset - nameoffset), parent.toString());
-        // 判断有没有下一级
-        if (parent.getLeftChild() == null && parent.getRightChild() == null) {
-            return;
-        }
-        // 如果有，添加分割线即/\
-        PrintLine separateLine = lineMap.get(level + 1);
-        if (separateLine == null) {
-            separateLine = new PrintLine();
-            lineMap.put(level + 1, separateLine);
-        }
-        if (parent.getLeftChild() != null) {
-            separateLine.putString(offset - 1, "/");
-            calculateLines(parent.getLeftChild(), offset - nameoffset - 1, lineMap, level + 2, false);
-        }
-        if (parent.getRightChild() != null) {
-            separateLine.putString(offset + nameoffset + 1, "\\");
-            calculateLines(parent.getRightChild(), offset + nameoffset + 1, lineMap, level + 2, true);
+
+    private static void writeArray(TreeNode currNode, int rowIndex, int columnIndex, String[][] res, int treeDepth) {
+        // 保证输入的树不为空
+        if (currNode == null) return;
+        // 先将当前节点保存到二维数组中
+        res[rowIndex][columnIndex] = String.valueOf(currNode.val);
+
+        // 计算当前位于树的第几层
+        int currLevel = ((rowIndex + 1) / 2);
+        // 若到了最后一层，则返回
+        if (currLevel == treeDepth) return;
+        // 计算当前行到下一行，每个元素之间的间隔（下一行的列索引与当前元素的列索引之间的间隔）
+        int gap = treeDepth - currLevel - 1;
+
+        // 对左儿子进行判断，若有左儿子，则记录相应的"/"与左儿子的值
+        if (currNode.left != null) {
+            res[rowIndex + 1][columnIndex - gap] = "/";
+            writeArray(currNode.left, rowIndex + 2, columnIndex - gap * 2, res, treeDepth);
         }
 
+        // 对右儿子进行判断，若有右儿子，则记录相应的"\"与右儿子的值
+        if (currNode.right != null) {
+            res[rowIndex + 1][columnIndex + gap] = "\\";
+            writeArray(currNode.right, rowIndex + 2, columnIndex + gap * 2, res, treeDepth);
+        }
     }
 
-    /**
-     * 需要打印的某一行
-     *
-     * @author zhuguohui
-     *
-     */
-    private static class PrintLine {
-        /**
-         * 记录了offset和String的map
-         */
-        Map<Integer, String> printItemsMap = new HashMap<>();
-        int maxOffset = 0;
 
-        public void putString(int offset, String info) {
-            printItemsMap.put(offset, info);
-            if (offset > maxOffset) {
-                maxOffset = offset;
+    public static void show(TreeNode root) {
+        if (root == null) System.out.println("EMPTY!");
+        // 得到树的深度
+        int treeDepth = getTreeDepth(root);
+
+        // 最后一行的宽度为2的（n - 1）次方乘3，再加1
+        // 作为整个二维数组的宽度
+        int arrayHeight = treeDepth * 2 - 1;
+        int arrayWidth = (2 << (treeDepth - 2)) * 3 + 1;
+        // 用一个字符串数组来存储每个位置应显示的元素
+        String[][] res = new String[arrayHeight][arrayWidth];
+        // 对数组进行初始化，默认为一个空格
+        for (int i = 0; i < arrayHeight; i++) {
+            for (int j = 0; j < arrayWidth; j++) {
+                res[i][j] = " ";
             }
         }
 
-        public String getLineString() {
-            StringBuffer buffer = new StringBuffer();
-            for (int i = 0; i <= maxOffset; i++) {
-                String info = printItemsMap.get(i);
-                if (info == null) {
-                    buffer.append(" ");
-                } else {
-                    buffer.append(info);
-                    i += info.length();
+        // 从根节点开始，递归处理整个树
+        // res[0][(arrayWidth + 1)/ 2] = (char)(root.val + '0');
+        writeArray(root, 0, arrayWidth / 2, res, treeDepth);
+
+        // 此时，已经将所有需要显示的元素储存到了二维数组中，将其拼接并打印即可
+        for (String[] line : res) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < line.length; i++) {
+                sb.append(line[i]);
+                if (line[i].length() > 1 && i <= line.length - 1) {
+                    i += line[i].length() > 4 ? 2 : line[i].length() - 1;
                 }
             }
-            return buffer.toString();
+            System.out.println(sb.toString());
         }
-
-    }
-
-    private static int findMaxOffset(TreeNode parent, int offset, boolean findLeft) {
-        if (parent != null) {
-            offset += parent.toString().length();
-        }
-        if (findLeft && parent.getLeftChild() != null) {
-            offset += 1;
-            return findMaxOffset(parent.getLeftChild(), offset, findLeft);
-        }
-        if (!findLeft && parent.getRightChild() != null) {
-            return findMaxOffset(parent.getRightChild(), offset, findLeft);
-        }
-        return offset;
-    }
-
-    public interface TreeNode {
-
-        TreeNode getLeftChild();
-
-        TreeNode getRightChild();
     }
 }
+

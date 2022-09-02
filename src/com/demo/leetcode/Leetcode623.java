@@ -1,5 +1,6 @@
 package com.demo.leetcode;
 
+import com.demo.leetcode.datastruct.TreeNode;
 import com.demo.leftgod.TreePrintUtil;
 
 import java.util.Arrays;
@@ -16,7 +17,7 @@ public class Leetcode623 {
         root.right = r1;
         l1.left = l2;
         addOneRow(root, 5, 4);
-        TreePrintUtil.pirnt(root);
+        TreePrintUtil.show(root);
     }
 
     public static TreeNode addOneRow(TreeNode root, int val, int depth) {
