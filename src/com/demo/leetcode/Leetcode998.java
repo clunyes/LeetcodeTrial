@@ -1,5 +1,7 @@
 package com.demo.leetcode;
 
+import com.demo.leetcode.datastruct.TreeNode;
+
 public class Leetcode998 {
 
     public static TreeNode insertIntoMaxTree(TreeNode root, int val) {

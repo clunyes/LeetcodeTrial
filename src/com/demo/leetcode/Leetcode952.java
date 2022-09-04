@@ -1,5 +1,7 @@
 package com.demo.leetcode;
 
+import com.demo.leetcode.datastruct.UnionDisjointSet;
+
 import java.util.*;
 
 public class Leetcode952 {

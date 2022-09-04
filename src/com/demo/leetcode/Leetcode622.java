@@ -1,5 +1,7 @@
 package com.demo.leetcode;
 
+import com.demo.leetcode.datastruct.MyCircularQueue;
+
 public class Leetcode622 {
     public static void main(String[] args) {
         MyCircularQueue circularQueue = new MyCircularQueue(3); // 设置长度为 3

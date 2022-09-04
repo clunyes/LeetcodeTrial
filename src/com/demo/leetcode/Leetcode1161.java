@@ -1,5 +1,7 @@
 package com.demo.leetcode;
 
+import com.demo.leetcode.datastruct.TreeNode;
+
 import java.util.ArrayList;
 import java.util.List;
 
