@@ -1,4 +1,4 @@
-package com.demo.leetcode;
+package com.demo.leetcode.onethousand;
 
 import com.demo.leetcode.datastruct.UnionDisjointSet;
 

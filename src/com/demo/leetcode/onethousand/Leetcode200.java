@@ -1,4 +1,4 @@
-package com.demo.leetcode;
+package com.demo.leetcode.onethousand;
 
 public class Leetcode200 {
     public static void main(String[] args) {

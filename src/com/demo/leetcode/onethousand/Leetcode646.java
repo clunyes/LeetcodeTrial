@@ -1,4 +1,4 @@
-package com.demo.leetcode;
+package com.demo.leetcode.onethousand;
 
 import java.util.Arrays;
 
