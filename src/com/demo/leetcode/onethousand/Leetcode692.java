@@ -1,8 +1,5 @@
 package com.demo.leetcode.onethousand;
 
-import javafx.util.Pair;
-
-import java.lang.annotation.Inherited;
 import java.util.*;
 
 public class Leetcode692 {
