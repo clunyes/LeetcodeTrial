@@ -1,4 +1,4 @@
-package com.demo.leetcode;
+package com.demo.leetcode.twothousand;
 
 public class Leetcode1413 {
 
