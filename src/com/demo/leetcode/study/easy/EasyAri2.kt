@@ -9,7 +9,7 @@ fun main() {
 fun maxProfit(prices: IntArray): Int {
     var max = 0
     for (i in 0 until prices.size - 1) {
-        max += max((prices[i + 1] - prices[i]), 0)
+        max += Math.max((prices[i + 1] - prices[i]), 0)
     }
     return max
 }
