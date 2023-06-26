@@ -1,0 +1,12 @@
+package com.demo.demo.classDemo.innerclass;
+
+public class InnerClassDemo5 {
+    public static void main(String[] args) {
+        Person p = new Person() {
+            public void eat() {
+                System.out.println("people eat something");
+            }
+        };
+        p.eat();
+    }
+}
