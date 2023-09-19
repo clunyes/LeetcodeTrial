@@ -18,6 +18,13 @@ public class CollectionDemo {
 
         HashMap<String, String> hashmap = new HashMap<>();
 
+        String s1= hashmap.put("001","zhangsan");
+        String s2=hashmap.put("001","wangwu");
+        String s3=hashmap.put("001","zhaosi");
+        System.out.println(s1);
+        System.out.println(s2);
+        System.out.println(s3);
+
         ConcurrentHashMap cmap = new ConcurrentHashMap();
     }
 }
