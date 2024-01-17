@@ -1,9 +1,8 @@
 package com.demo.leetcode.onethousand;
 
 import java.util.HashMap;
-import java.util.HashSet;
 
-public class leetcode1 {
+public class Leetcode1 {
 
     public static void main(String[] args) {
         twoSum(new int[]{-3, 4, 3, 90}, 0);
