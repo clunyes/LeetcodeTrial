@@ -5,8 +5,9 @@ public class Leetcode8 {
     public static void main(String[] args) {
         System.out.println(myAtoi("4193 with words"));
     }
-    public static int myAtoi(String str) {
-        char[] chars = str.toCharArray();
+
+    public static int myAtoi(String s) {
+        char[] chars = s.toCharArray();
         int n = chars.length;
         int idx = 0;
         while (idx < n && chars[idx] == ' ') {
