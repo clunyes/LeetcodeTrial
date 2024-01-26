@@ -32,7 +32,7 @@ public class Leetcode234 {
                 n = new ListNode(node.val);
                 cur = n;
             } else {
-                cur.next = new ListNode(node.val);;
+                cur.next = new ListNode(node.val);
                 cur = cur.next;
             }
         }
