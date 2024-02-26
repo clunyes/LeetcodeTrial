@@ -1,7 +1,6 @@
 package com.demo.leetcode.onethousand;
 
 import com.demo.leetcode.datastruct.TreeNode;
-import com.demo.leftgod.TreePrintUtil;
 
 public class Leetcode669 {
 

@@ -2,10 +2,6 @@ package com.demo.leetcode.onethousand;
 
 import com.demo.leetcode.datastruct.TreeNode;
 
-import java.util.ArrayDeque;
-import java.util.Map;
-import java.util.Stack;
-
 public class Leetcode687 {
 
     public static void main(String[] args) {
